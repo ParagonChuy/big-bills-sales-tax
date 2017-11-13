@@ -1,4 +1,5 @@
 var fs = require('fs');
+var calculate_tax = require('../modules/calculate_tax').calculate_tax;
 
 var input_parser = (function() {
   return {
@@ -18,15 +19,19 @@ var input_parser = (function() {
         var item = x.split(" at ");
         item = item[0].replace(/[0-9]+/,'').trim();
 
+        // console.log(`${item} isn jknrfvkdnfkjdn`)
         var obj = {
           amount: amount,
           item: item,
-          tax_rate: 0,
+          tax_rate: calculate_tax.tax_rate(item),
           price: price,
+          imported: calculate_tax.isImported(item),
+          exempt: calculate_tax.isExempt(item)
         }
+
         return obj;
       });
-
+      console.log(mapped);
       return mapped;
     },
 
@@ -44,8 +49,8 @@ var input_parser = (function() {
     retrieve_and_ready: function(file_path) {
       var doc = this.load_doc(file_path);
       var arr = this.raw_doc_to_array(doc);
-      this.doc_to_json(doc);
-      return arr;
+      var json = this.doc_to_json(doc);
+      return json;
     },
 
   }
