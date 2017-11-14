@@ -3,7 +3,7 @@ var calculate_tax = (function() {
   return {
     isExempt: function(x) {
       var exemptions = ["book", "chocolates", "CD", "pills"];
-      split_arr = x.split(" ");
+      var split_arr = x.toString().split(" ");
       var store = split_arr.map(function(curr) {
         return exemptions.includes(curr);
       });
@@ -16,25 +16,23 @@ var calculate_tax = (function() {
 
     tax_rate: function(x) {
       var rate = 0;
-      switch (x) {
-        case this.isExempt(x) && this.isImported(x):
-          // IS EXEMPT && IMPORTED
-
-          break;
-        case this.isImported(x):
-          // IS IMPORTED
-
-          break;
-        case this.isExempt(x):
-          // IS EXEMPT
-
-          break;
-        default:
-          // Default to 0.1
-          break;
-
+      var standard_tax = 0.10;
+      var import_tax = 0.05;
+      if (x.exempt) {
+        rate = 0;
       }
-      return x;
+      if (x.imported && !x.exempt) {
+        rate = import_tax + standard_tax;
+      }
+      if (!x.imported && !x.exempt) {
+        rate = standard_tax;
+      }
+      if (x.imported && x.exempt) {
+        rate = import_tax;
+      }
+      var a = rate.toFixed(2);
+      console.log(typeof rate)
+      return Number(rate.toFixed(2));
     }
   }
 })();

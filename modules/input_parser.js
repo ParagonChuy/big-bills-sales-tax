@@ -17,9 +17,8 @@ var input_parser = (function() {
         var price = amount_price[1];
 
         var item = x.split(" at ");
-        item = item[0].replace(/[0-9]+/,'').trim();
+        item = item[0].replace(/[0-9]+/, '').trim();
 
-        // console.log(`${item} isn jknrfvkdnfkjdn`)
         var obj = {
           amount: amount,
           item: item,
@@ -28,15 +27,13 @@ var input_parser = (function() {
           imported: calculate_tax.isImported(item),
           exempt: calculate_tax.isExempt(item)
         }
-
         return obj;
       });
-      console.log(mapped);
       return mapped;
     },
 
 
-    filter_empty_objects: function(arr){
+    filter_empty_objects: function(arr) {
       return arr.filter(function(e) {
         return e;
       });
@@ -48,10 +45,9 @@ var input_parser = (function() {
 
     retrieve_and_ready: function(file_path) {
       var doc = this.load_doc(file_path);
-      var arr = this.raw_doc_to_array(doc);
       var json = this.doc_to_json(doc);
       return json;
-    },
+    }
 
   }
 })();
