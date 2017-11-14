@@ -11,12 +11,12 @@ var input_parser = (function() {
       var arr = this.raw_doc_to_array(doc);
       arr = this.filter_empty_objects(arr);
 
-      var mapped = arr.map(function(x) {
-        var amount_price = x.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g);
+      var mapped = arr.map(function(curr) {
+        var amount_price = curr.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g);
         var amount = amount_price[0];
         var price = amount_price[1];
 
-        var item = x.split(" at ");
+        var item = curr.split(" at ");
         item = item[0].replace(/[0-9]+/, '').trim();
 
         var obj = {
