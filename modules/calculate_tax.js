@@ -2,7 +2,7 @@ var calculate_tax = (function() {
 
   return {
     isExempt: function(curr) {
-      var exemptions = ["book", "chocolates", "CD", "pills"];
+      var exemptions = ["book", "chocolates", "chocolate", "CD", "pills"];
       var split_arr = curr.split(" ");
       var store = split_arr.map(function(curr) {
         return exemptions.includes(curr);
@@ -14,25 +14,23 @@ var calculate_tax = (function() {
       return x.match("imported") ? true : false;
     },
 
-    tax_rate: function(elem) {
-      var rate = 0;
-      var standard_tax = 0.10;
-      var import_tax = 0.05;
-      if (elem.exempt) {
-        rate = 0;
+    tax_rate: function(exempt, imported) {
+      switch (true) {
+        case exempt && imported:
+          return 0.05
+        case exempt && !imported:
+          return 0
+        case !exempt && imported:
+          return 0.15
+        default:
+          return 0.1
       }
-      if (elem.imported && !elem.exempt) {
-        rate = import_tax + standard_tax;
-      }
-      if (!elem.imported && !elem.exempt) {
-        rate = standard_tax;
-      }
-      if (elem.imported && elem.exempt) {
-        rate = import_tax;
-      }
-      return Number(rate.toFixed(2));
     }
+
   }
 })();
+
+
+
 
 module.exports.calculate_tax = calculate_tax;

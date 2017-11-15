@@ -22,10 +22,10 @@ var input_parser = (function() {
         var obj = {
           amount: amount,
           item: item,
-          tax_rate: calculate_tax.tax_rate(item),
-          price: price,
           imported: calculate_tax.isImported(item),
-          exempt: calculate_tax.isExempt(item)
+          tax_rate: calculate_tax.tax_rate(this.exempt, this.imported),
+          exempt: calculate_tax.isExempt(item),
+          price: price
         }
         return obj;
       });

@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var assert = require('assert');
 var input_parser = require('../modules/input_parser').input_parser;
 
-describe('Read File', function() {
+describe('Input Parser', function() {
   var file_path = './receipts/input_01.txt';
   var file = input_parser.load_doc(file_path);
   var sample_receipt = `1 book at 12.49
