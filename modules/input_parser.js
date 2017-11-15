@@ -4,7 +4,7 @@ var calculate_tax = require('../modules/calculate_tax').calculate_tax;
 var input_parser = (function() {
   return {
     load_doc: function(file_path) {
-      return file_contents = fs.readFileSync(file_path, 'utf-8');
+      return fs.readFileSync(file_path, 'utf-8');
     },
 
     doc_to_json: function(doc) {
@@ -23,15 +23,19 @@ var input_parser = (function() {
           amount: amount,
           item: item,
           imported: calculate_tax.isImported(item),
-          tax_rate: calculate_tax.tax_rate(this.exempt, this.imported),
           exempt: calculate_tax.isExempt(item),
-          price: price
-        }
+          tax_rate: function(){ return calculate_tax.tax_rate(this.exempt, this.imported) },
+          price: parseFloat(price),
+          total: function(){
+            var exp = parseFloat(this.price + (this.price * this.tax_rate()));
+            exp *= 20
+            return (Math.round(exp) / 20).toFixed(2)
+          }
+        };
         return obj;
       });
       return mapped;
     },
-
 
     filter_empty_objects: function(arr) {
       return arr.filter(function(e) {

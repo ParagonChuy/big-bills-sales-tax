@@ -1,24 +1,18 @@
-var fs = require('fs')
+var fs = require('fs');
+var total = require('../modules/total').total;
+var output = require('../modules/output').output;
+var input = require('../modules/input').input;
+
 var cli = (function(){
   return {
     start: function(){
-      console.log("******************************************");
-      console.log("******************************************");
-      console.log("***** Big Bill's Sales Tax Calculator*****");
-      console.log("******************************************");
-      console.log("******************************************");
-      console.log(this.readFiles())
-    },
-    readFiles: function(){
-      var receipts_dir = '../receipts/'
-      var files = []
-      fs.readdirSync(receipts_dir).forEach(file => {
-        files.push(file);
-      });
-      return files;
+      output.run();
     }
   };
 })();
 
+
+
 cli.start();
-cli
+
+module.exports.cli = cli;

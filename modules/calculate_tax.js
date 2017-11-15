@@ -2,7 +2,7 @@ var calculate_tax = (function() {
 
   return {
     isExempt: function(curr) {
-      var exemptions = ["book", "chocolates", "chocolate", "CD", "pills"];
+      var exemptions = ["book", "chocolates", "chocolate", "pills"];
       var split_arr = curr.split(" ");
       var store = split_arr.map(function(curr) {
         return exemptions.includes(curr);
