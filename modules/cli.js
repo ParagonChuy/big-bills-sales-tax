@@ -1,11 +1,11 @@
-var fs = require('fs');
-var total = require('../modules/total').total;
-var output = require('../modules/output').output;
-var input = require('../modules/input').input;
+const fs = require('fs');
+const total = require('../modules/total').total;
+const output = require('../modules/output').output;
+const input = require('../modules/input').input;
 
-var cli = (function(){
+const cli = (function(){
   return {
-    start: function(){
+    start: () => {
       output.run();
     }
   };

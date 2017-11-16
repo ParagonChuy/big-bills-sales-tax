@@ -2,8 +2,9 @@
   "name": "big-bills-sales-tax",
   "version": "1.0.0",
   "description": "A sales tax calculator for Big Bill",
-  "main": "index.js",
+  "main": "cli.js",
   "scripts": {
+    "start": "node ./modules/cli.js",
     "test": "mocha"
   },
   "repository": {

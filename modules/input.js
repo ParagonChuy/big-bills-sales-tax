@@ -1,9 +1,9 @@
-var readlineSync = require('readline-sync');
+const readlineSync = require('readline-sync');
 
-var input = (function(){
+const input = (function(){
   return {
     capture_input: function(){
-      var input = readlineSync.questionInt('Choose a number: ');
+      let input = readlineSync.questionInt('Choose a file: ');
       return input;
     }
 };

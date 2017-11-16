@@ -1,50 +1,50 @@
-var fs = require('fs');
-var input = require('../modules/input').input;
-var input_parser = require('../modules/input_parser').input_parser;
-var total = require('../modules/total').total;
+const fs = require('fs');
+const input = require('../modules/input').input;
+const input_parser = require('../modules/input_parser').input_parser;
+const total = require('../modules/total').total;
 
 
-var output = (function(){
+const output = (function() {
   return {
-    handleInput: function(){
-      var user_input = input.capture_input();
-      var file_path = this.input_to_file_path(user_input);
-      var file = input_parser.load_doc(file_path);
-      var doc = input_parser.retrieve_and_ready(file_path);
+    handleInput: function() {
+      let user_input = input.capture_input();
+      let file_path = this.input_to_file_path(user_input);
+      let file = input_parser.load_doc(file_path);
+      let doc = input_parser.retrieve_and_ready(file_path);
       console.log(`\nYour order looks like this:\n${file}`)
       this.updatePrice(doc);
       total.finalize_tab(doc);
     },
-    header: function(){
+    header: function() {
       console.log("########################################");
       console.log("### Big Bill's Sales Tax Calculator ####");
       console.log("########################################\n");
     },
-    listFiles: function(file){
-      var files = this.readFiles();
-      files.forEach(function(curr,index){
+    listFiles: function(file) {
+      let files = this.readFiles();
+      files.forEach((curr, index) => {
         console.log(`${index + 1}. ${curr}`);
       });
     },
-    input_to_file_path: function(input){
-      var files = this.readFiles();
-      return `../receipts/${files[input - 1]}`;
+    input_to_file_path: function(input) {
+      let files = this.readFiles();
+      return `./receipts/${files[input - 1]}`;
     },
-    readFiles: function(){
-      var receipts_dir = '../receipts/';
-      var files = [];
+    readFiles: function() {
+      let receipts_dir = './receipts/';
+      let files = [];
       fs.readdirSync(receipts_dir).forEach(file => {
         files.push(file);
       });
       return files;
     },
-    updatePrice: function(doc){
+    updatePrice: function(doc) {
       total.getTotal(doc);
-      doc.map(function(curr){
+      doc.map(curr => {
         curr.price = curr.original_price + curr.sales_tax();
       });
     },
-    run: function(){
+    run: function() {
       this.readFiles();
       this.header();
       this.listFiles();
