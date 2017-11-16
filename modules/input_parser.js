@@ -25,11 +25,14 @@ var input_parser = (function() {
           imported: calculate_tax.isImported(item),
           exempt: calculate_tax.isExempt(item),
           tax_rate: function(){ return calculate_tax.tax_rate(this.exempt, this.imported) },
-          price: parseFloat(price),
+          price: Number(price),
+          sales_tax: function(){
+            return (this.original_price * this.tax_rate() * 100) / 100
+          },
+          original_price: Number(price),
           total: function(){
-            var exp = parseFloat(this.price + (this.price * this.tax_rate()));
-            exp *= 20
-            return (Math.round(exp) / 20).toFixed(2)
+            var exp = parseFloat(this.original_price + (this.original_price * this.tax_rate()))
+            return Math.round(exp * 100 ) /100
           }
         };
         return obj;

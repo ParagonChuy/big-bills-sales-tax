@@ -12,8 +12,8 @@ var output = (function(){
       var file = input_parser.load_doc(file_path);
       var doc = input_parser.retrieve_and_ready(file_path);
       console.log(`\nYour order looks like this:\n${file}`)
-      // Do Calculations and Output Result
-      total.getPrices(doc);
+      this.updatePrice(doc);
+      total.finalize_tab(doc);
     },
     header: function(){
       console.log("########################################");
@@ -37,6 +37,12 @@ var output = (function(){
         files.push(file);
       });
       return files;
+    },
+    updatePrice: function(doc){
+      total.getTotal(doc);
+      doc.map(function(curr){
+        curr.price = curr.original_price + curr.sales_tax();
+      });
     },
     run: function(){
       this.readFiles();
