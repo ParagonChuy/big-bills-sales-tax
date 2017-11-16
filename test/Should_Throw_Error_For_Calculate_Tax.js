@@ -15,13 +15,16 @@ describe("Calculate Tax", function(){
   it("Calculate Tax#imported", function(){
     var exempt = true;
     var imported = true;
-    var tax = calculate_tax.tax_rate(exempt,imported)
+    var tax = calculate_tax.tax_rate(exempt,imported);
     assert.equal(tax, 0.05);
   });
 
   it('Calculate Tax has correct numbers from file', function() {
     var file_path = './receipts/input_01.txt';
     var file = input_parser.retrieve_and_ready(file_path);
-    assert.equal(file[0].tax_rate,0.1);
+    let imported = file[0].imported;
+    let exempt = file[0].exempt;
+    var tax = calculate_tax.tax_rate(exempt, imported);
+    assert.equal(tax,0);
   });
 });
