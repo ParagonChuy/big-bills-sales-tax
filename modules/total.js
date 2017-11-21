@@ -8,6 +8,12 @@ const total = (function(){
     },
     getTotal: function(arr){
       return arr.reduce((total, curr) => total + curr.total(), 0).toFixed(2);
+    },
+    updatePrice: function(doc) {
+      total.getTotal(doc);
+      doc.map(curr => {
+        curr.price = curr.original_price + curr.sales_tax();
+      });
     }
   }
 })();
