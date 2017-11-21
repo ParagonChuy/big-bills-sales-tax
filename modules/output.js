@@ -6,14 +6,18 @@ const total = require('../modules/total').total;
 
 const output = (function() {
   return {
-    handleInput: function() {
+    main: function() {
       let user_input = input.capture_input();
       let file_path = this.input_to_file_path(user_input);
       let file = input_parser.load_doc(file_path);
       let doc = input_parser.retrieve_and_ready(file_path);
       console.log(`\nYour order looks like this:\n${file}`)
-      this.updatePrice(doc);
-      total.finalize_tab(doc);
+      total.updatePrice(doc);
+      console.log("RECEIPT")
+      this.receipt_content(doc);
+      console.log(`\nSales Tax: ${total.getSalesTax(doc)}`);
+      console.log(`Total: ${total.getTotal(doc)}`);
+
     },
     header: function() {
       console.log("########################################");
@@ -38,17 +42,14 @@ const output = (function() {
       });
       return files;
     },
-    updatePrice: function(doc) {
-      total.getTotal(doc);
-      doc.map(curr => {
-        curr.price = curr.original_price + curr.sales_tax();
-      });
+    receipt_content: function(arr){
+      return arr.forEach(curr => console.log(`${curr.amount} ${curr.item} at ${curr.price.toFixed(2)}`));
     },
     run: function() {
       this.readFiles();
       this.header();
       this.listFiles();
-      this.handleInput();
+      this.main();
     }
   }
 })();
