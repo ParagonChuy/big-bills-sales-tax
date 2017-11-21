@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ParagonChuy/big-bills-sales-tax/issues"
   },
-  "homepage": "https://github.com/ParagonChuy/big-bills-sales-tax#readme"
+  "homepage": "https://github.com/ParagonChuy/big-bills-sales-tax#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.7"
+  }
 }
