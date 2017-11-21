@@ -10,16 +10,11 @@ describe('Input Parser', function() {
 1 chocolate bar at 0.85
 `;
 
-    it('Input Parser loads text file', function() {
-      var valid_string = (typeof file != 'undefined' && typeof file === 'string');
-      assert.equal(valid_string, true);
-    });
-
     it('Input Parser has correct contents', function() {
       assert.equal(file, sample_receipt);
     });
 
-    it('Input Parser parses into JSON', function() {
+    it('Input Parser parses into JSON .doc_to_json', function() {
       var arr = input_parser.doc_to_json(file);
       var valid_json = (typeof arr === 'object');
       assert.equal(valid_json , true);

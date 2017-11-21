@@ -29,8 +29,8 @@ const input_parser = (function() {
           sales_tax: () => (obj.original_price * obj.tax_rate() * 100) / 100,
           original_price: Number(price),
           total: () => {
-            let exp = parseFloat(obj.original_price + (obj.original_price * obj.tax_rate()))
-            return Math.round(exp * 100) / 100;
+            let total = parseFloat(obj.original_price + (obj.original_price * obj.tax_rate()))
+            return Math.round(total * 100) / 100;
           }
         };
         return obj;
