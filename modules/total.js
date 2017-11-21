@@ -17,17 +17,6 @@ const total = (function(){
       });
 
       return arr.reduce((total, curr) => total + curr.sales_tax());
-    },
-    getTotal: function(arr){
-      return arr.reduce((total, curr) => total + curr.total());
-    },
-    finalize_tab: function(arr){
-      console.log("RECEIPT\n");
-      let output = arr.forEach(curr => console.log(`${curr.amount} ${curr.item} at ${curr.price}`));
-      let total = this.getTotal(arr);
-      let sales_tax = this.getSalesTax(arr);
-      console.log(`\nSales Tax: ${sales_tax}`);
-      console.log(`Total: ${total}`);
     }
   }
 })();
